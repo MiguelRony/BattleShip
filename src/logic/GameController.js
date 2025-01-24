@@ -10,16 +10,16 @@ export const GameController = ((p1, p2) => {
     let gameOver = false;
 
     const startGame = () => {
-        player1.gameboard.placeShip(new Ship('Carrier', 5), [0,0], [0,4]);
-        player1.gameboard.placeShip(new Ship('Battleship', 4), [1,0], [1,3]);
-        player1.gameboard.placeShip(new Ship('Cruiser', 3), [2,0], [2,2]);
-        player1.gameboard.placeShip(new Ship('Submarine', 3), [3,0], [3,2]);
+        // player1.gameboard.placeShip(new Ship('Carrier', 5), [0,0], [0,4]);
+        // player1.gameboard.placeShip(new Ship('Battleship', 4), [1,0], [1,3]);
+        // player1.gameboard.placeShip(new Ship('Cruiser', 3), [2,0], [2,2]);
+        // player1.gameboard.placeShip(new Ship('Submarine', 3), [3,0], [3,2]);
         player1.gameboard.placeShip(new Ship('Destroyer', 2), [4,0], [4,1]);
 
-        player2.gameboard.placeShip(new Ship('Carrier', 5), [0,0], [0,4]);
-        player2.gameboard.placeShip(new Ship('Battleship', 4), [1,0], [1,3]);
-        player2.gameboard.placeShip(new Ship('Cruiser', 3), [2,0], [2,2]);
-        player2.gameboard.placeShip(new Ship('Submarine', 3), [3,0], [3,2]);
+        // player2.gameboard.placeShip(new Ship('Carrier', 5), [0,0], [0,4]);
+        // player2.gameboard.placeShip(new Ship('Battleship', 4), [1,0], [1,3]);
+        // player2.gameboard.placeShip(new Ship('Cruiser', 3), [2,0], [2,2]);
+        // player2.gameboard.placeShip(new Ship('Submarine', 3), [3,0], [3,2]);
         player2.gameboard.placeShip(new Ship('Destroyer', 2), [4,0], [4,1]);
     }
 
@@ -34,8 +34,10 @@ export const GameController = ((p1, p2) => {
     }
 
     const attack = (position) => {
+        console.log(currentPlayer.name);
         if(!gameOver){
             let response = currentPlayer.attack(opponent, position);
+            
             if(response !== 'miss' && response !== 'hit'){
                 return response;
             }
@@ -44,8 +46,11 @@ export const GameController = ((p1, p2) => {
                 return 'Game Over';
             }
             switchTurns();
+            return response;
         }
     }
 
-    return { startGame, attack };
+    const getCurrentPlayer = () => currentPlayer;
+
+    return { getCurrentPlayer, startGame, attack };
 });

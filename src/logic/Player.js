@@ -7,6 +7,7 @@ export class Player{
     }
 
     attack(opponent, position){
+        console.log(this.name+" attacking");
         return opponent.gameboard.receiveAttack(position);
     }
 }
